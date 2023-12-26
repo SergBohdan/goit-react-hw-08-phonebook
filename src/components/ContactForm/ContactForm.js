@@ -1,23 +1,20 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FindInput, FormBtn, FormStyle } from "./ContactFormStyled";
-import { selectVisibleContacts } from 'redux/selectors';
-import { addContact } from 'redux/operations';
+import { addContact } from 'redux/contacts/contactsOperations';
+import { selectContacts } from 'redux/contacts/contactsSelectors';
 
-const ContactForm = () => {
-  const visibleContacts = useSelector(selectVisibleContacts);
-  
+
+
+export const ContactForm = () => {
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
-  const [contactName, setContactName] = useState('');
+  const [contactName, setcontactName] = useState('');
   const [number, setNumber] = useState('');
 
-  const handleSubmit = evt => {
-    evt.preventDefault();
-
-    const normalizedContactName = contactName.toLowerCase();
-   
-    if (visibleContacts.some(({ name }) => name.toLowerCase() === normalizedContactName)) {
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (contacts.some(({ name }) => name === contactName)) {
       window.alert(`${contactName} is already in your contacts`);
       return;
     }
@@ -25,20 +22,20 @@ const ContactForm = () => {
     dispatch(
       addContact({
         name: contactName,
-        phone: number, 
+        number,
       })
     );
 
-    setContactName('');
+    setcontactName('');
     setNumber('');
   };
 
-  const handleChange = evt => {
-    const { value, name } = evt.target;
+  const handleChange = e => {
+    const { value, name } = e.target;
 
     switch (name) {
       case 'name':
-        setContactName(value);
+        setcontactName(value);
         break;
       case 'number':
         setNumber(value);
@@ -50,10 +47,11 @@ const ContactForm = () => {
   };
 
   return (
-    <FormStyle onSubmit={handleSubmit}>
-      <label>
+    <form onSubmit={handleSubmit}>
+      <label >
         Name
-        <FindInput
+        <input
+         
           type="text"
           name="name"
           value={contactName}
@@ -64,9 +62,10 @@ const ContactForm = () => {
         />
       </label>
 
-      <label>
+      <label >
         Number
-        <FindInput
+        <input
+          
           type="tel"
           name="number"
           value={number}
@@ -77,9 +76,9 @@ const ContactForm = () => {
         />
       </label>
 
-      <FormBtn type="submit">Add contact</FormBtn>
-    </FormStyle>
+      <button  type="submit">
+        Add contact
+      </button>
+    </form>
   );
 };
-
-export default ContactForm;
