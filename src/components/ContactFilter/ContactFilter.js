@@ -1,3 +1,4 @@
+import { StyledInput } from 'components/LoginForm/LoginFormStyled';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectStatusFilter } from 'redux/contacts/contactsSelectors';
 import { setFilter } from 'redux/filterSlice';
@@ -13,7 +14,7 @@ export default function Filter() {
   return (
     <label >
       Find contacts by name
-      <input
+      <StyledInput
         
         type="text"
         name={filter}

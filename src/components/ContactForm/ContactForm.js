@@ -1,3 +1,4 @@
+import { LogInBtn, StyledForm, StyledInput } from 'components/LoginForm/LoginFormStyled';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contacts/contactsOperations';
@@ -47,10 +48,10 @@ export const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit}>
       <label >
         Name
-        <input
+        <StyledInput
          
           type="text"
           name="name"
@@ -64,7 +65,7 @@ export const ContactForm = () => {
 
       <label >
         Number
-        <input
+        <StyledInput
           
           type="tel"
           name="number"
@@ -76,9 +77,9 @@ export const ContactForm = () => {
         />
       </label>
 
-      <button  type="submit">
+      <LogInBtn  type="submit">
         Add contact
-      </button>
-    </form>
+      </LogInBtn>
+    </StyledForm>
   );
 };

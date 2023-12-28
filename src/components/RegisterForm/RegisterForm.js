@@ -1,3 +1,5 @@
+import { StyledForm, StyledInput } from 'components/LoginForm/LoginFormStyled';
+import { LogOutBtn } from 'components/UserMenu/UserMenuStyled';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/authOperations';
 
@@ -18,22 +20,22 @@ export const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
+    <StyledForm onSubmit={handleSubmit} autoComplete="off">
       <label >
         Username
-        <input type="text" name="name" />
+        <StyledInput type="text" name="name" />
       </label>
       <label >
         Email
-        <input type="email" name="email" />
+        <StyledInput type="email" name="email" />
       </label>
       <label >
         Password
-        <input type="password" name="password" />
+        <StyledInput type="password" name="password" />
       </label>
-      <button type="submit">
+      <LogOutBtn type="submit">
         Sign up
-      </button>
-    </form>
+      </LogOutBtn>
+    </StyledForm>
   );
 };
