@@ -1,11 +1,10 @@
-import Filter from 'components/ContactFilter/ContactFilter';
-import { ContactForm } from 'components/ContactForm/ContactForm';
-import { ContactList } from 'components/ContactList/ContactList';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/contacts/contactsOperations';
 import { selectError, selectIsLoading } from 'redux/contacts/contactsSelectors';
-import { selectVisibleContacts } from 'redux/contacts/contactsSelectors';
+import { ContactForm } from 'components/ContactForm/ContactForm';
+import Filter from 'components/ContactFilter/ContactFilter';
+import { ContactList } from 'components/ContactList/ContactList';
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -16,15 +15,13 @@ export default function Contacts() {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const visibleContacts = useSelector(selectVisibleContacts);
-
-  return (
+   return (
     <div>
       <ContactForm />
       <Filter />
       <title>Contacts</title>
       {isLoading && !error && <b>Loading...</b>}
-      <ContactList contacts={visibleContacts} />
+      <ContactList />
     </div>
   );
 }

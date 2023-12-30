@@ -15,7 +15,7 @@ export const ContactForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (contacts.some(({ name }) => name === contactName)) {
+    if (contacts.some(({ name }) => name.toLowerCase() === contactName.toLowerCase())) {
       window.alert(`${contactName} is already in your contacts`);
       return;
     }
